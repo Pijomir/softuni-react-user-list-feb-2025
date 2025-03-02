@@ -24,13 +24,24 @@ export default function UserList() {
 
     const closeCreateUserClickHandler = () => {
         setShowCreate(false);
-    }
+    };
+
+    const saveCreateUserClickHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new formData(e.target);
+        const formValues = Object.entries(formData);
+    };
 
     return (
         <section className="card users-container">
             <Search />
 
-            {showCreate && <UserCreate onClose={closeCreateUserClickHandler} />}     
+            {showCreate && 
+                <UserCreate 
+                    onClose={closeCreateUserClickHandler} 
+                    onSave={saveCreateUserClickHandler}
+                />}     
 
             <div className="table-wrapper">
 

@@ -26,11 +26,17 @@ export default function UserList() {
         setShowCreate(false);
     };
 
-    const saveCreateUserClickHandler = (e) => {
+    const saveCreateUserClickHandler = async (e) => {
         e.preventDefault();
 
-        const formData = new formData(e.target);
-        const formValues = Object.entries(formData);
+        const formData = new FormData(e.target);
+        const userData = Object.fromEntries(formData);
+
+        const newUser = await userService.create(userData);
+
+        setUsers(state => [...state, newUser]);
+
+        setShowCreate(false);
     };
 
     return (

@@ -7,11 +7,13 @@ import Search from "./Search";
 import UserListItem from "./UserListItem";
 import UserCreate from "./UserCreate";
 import UserInfo from "./UserInfo";
+import UserDelete from "./UserDelete";
 
 export default function UserList() {
     const [users, setUsers] = useState([]);
     const [showCreate, setShowCreate] = useState(false);
     const [userIdInfo, setUserIdInfo] = useState(null);
+    const [userIdDelete, setUserIdDelete] = useState(null);
 
     useEffect(() => {
         userService.getAll()
@@ -49,6 +51,10 @@ export default function UserList() {
         setUserIdInfo(null);
     }
 
+    const userDeleteClickHandler = () => {
+        
+    }
+
     return (
         <section className="card users-container">
             <Search />
@@ -66,6 +72,8 @@ export default function UserList() {
                     onClose={userInfoCloseHandler}
                 />
             )}  
+
+            {userIdDelete && <UserDelete />}
 
             <div className="table-wrapper">
 
@@ -181,6 +189,7 @@ export default function UserList() {
                         {users.map(user => <UserListItem
                             key={user._id} 
                             onInfoClick={userInfoClickHandler}
+                            onDeleteClick={userDeleteClickHandler}
                             {...user} 
                         />)}
                     </tbody>

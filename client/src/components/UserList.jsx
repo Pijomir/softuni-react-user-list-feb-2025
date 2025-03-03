@@ -11,7 +11,7 @@ import UserInfo from "./UserInfo";
 export default function UserList() {
     const [users, setUsers] = useState([]);
     const [showCreate, setShowCreate] = useState(false);
-    const [userIdInfo, setUserIdInfo] = useState(null);
+    const [userIdInfo, setUserIdInfo] = useState();
 
     useEffect(() => {
         userService.getAll()
@@ -49,16 +49,18 @@ export default function UserList() {
         <section className="card users-container">
             <Search />
 
-            {showCreate && 
+            {showCreate && (
                 <UserCreate 
                     onClose={closeCreateUserClickHandler} 
                     onSave={saveCreateUserClickHandler}
-                />}     
+                />
+            )}     
 
-            {userIdInfo && 
+            {userIdInfo && (
                 <UserInfo 
                     userId={userIdInfo}
-                />}  
+                />
+            )}  
 
             <div className="table-wrapper">
 

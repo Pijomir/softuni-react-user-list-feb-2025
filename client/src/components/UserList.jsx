@@ -49,11 +49,23 @@ export default function UserList() {
 
     const userInfoCloseHandler = () => {
         setUserIdInfo(null);
-    }
+    };
 
-    const userDeleteClickHandler = () => {
-        
-    }
+    const userDeleteClickHandler = (userId) => {
+        setUserIdDelete(userId);
+    };
+
+    const userDeleteCloseHandler = () => {
+        setUserIdDelete(null);
+    };
+
+    const userDeleteHandler = async () => {
+        await userService.delete(userIdDelete);
+
+        setUsers(state => state.filter(user => user._id !== userIdDelete));
+
+        setUserIdDelete(null);
+    };
 
     return (
         <section className="card users-container">
@@ -73,7 +85,12 @@ export default function UserList() {
                 />
             )}  
 
-            {userIdDelete && <UserDelete />}
+            {userIdDelete && (
+                <UserDelete 
+                    onClose={userDeleteCloseHandler}
+                    onDelete={userDeleteHandler} 
+                />
+            )}
 
             <div className="table-wrapper">
 

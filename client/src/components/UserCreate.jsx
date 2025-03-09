@@ -19,6 +19,7 @@ export default function UserCreate({
                 setUser(result);
             });
     }, [userId]);
+    
 
     return (
         <div className="overlay">
